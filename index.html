@@ -793,7 +793,6 @@
             display: none;
         }
 
-        /* Mobile sidebar overlay */
         .sidebar-overlay {
             display: none;
             position: fixed;
@@ -810,7 +809,6 @@
             }
         }
 
-        /* Fix for small screens */
         .table-responsive {
             -webkit-overflow-scrolling: touch;
         }
@@ -824,7 +822,6 @@
                 font-size: .8rem;
             }
         }
-        /* Progress bar in subject progress */
         .progress {
             height: 6px;
             border-radius: 999px;
@@ -837,7 +834,6 @@
         .progress-bar {
             border-radius: 999px;
         }
-        /* KPI cards on mobile */
         .kpi-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -883,7 +879,6 @@
                 font-size: 1rem;
             }
         }
-        /* top results table */
         .top-table td,
         .top-table th {
             font-size: .72rem;
@@ -894,6 +889,26 @@
             .top-table th {
                 font-size: .82rem;
                 padding: 8px 12px;
+            }
+        }
+
+        /* Larger menu button */
+        #btnSidebar {
+            padding: 12px 16px !important;
+            font-size: 1.5rem !important;
+            line-height: 1 !important;
+            border-radius: 14px !important;
+        }
+        #btnSidebar i {
+            font-size: 1.5rem;
+        }
+        @media (max-width: 576px) {
+            #btnSidebar {
+                padding: 10px 14px !important;
+                font-size: 1.3rem !important;
+            }
+            #btnSidebar i {
+                font-size: 1.3rem;
             }
         }
     </style>
@@ -925,9 +940,9 @@
         <main class="main">
             <div class="topbar">
                 <div class="page-title d-flex align-items-center gap-2">
-                   <button class="btn btn-soft mobile-toggle" id="btnSidebar" style="padding:12px 16px; font-size:1.5rem; line-height:1; border-radius:14px;">
-    <i class="fa-solid fa-bars"></i>
-</button>
+                    <button class="btn btn-soft mobile-toggle" id="btnSidebar">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
                     <div>
                         <h2 id="dashTitle">Overview</h2>
                         <div class="sub" id="dashSub">Data embedded – ready to analyse</div>
@@ -988,7 +1003,17 @@
                         <div class="card-body p-0">
                             <div class="table-responsive" style="max-height:480px;overflow:auto;">
                                 <table class="table table-hover mb-0 align-middle" style="min-width:600px;">
-                                    <thead><tr><th>Index</th><th>Name</th><th>Gender</th><th>Medium</th><th>Attempt</th><th>Eligibility</th><th>Action</th></tr></thead>
+                                    <thead>
+                                        <tr>
+                                            <th>Index</th>
+                                            <th>Name</th>
+                                            <th>Gender</th>
+                                            <th>Medium</th>
+                                            <th>Attempt</th>
+                                            <th>Eligibility</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
                                     <tbody id="studentBody"></tbody>
                                 </table>
                             </div>
@@ -1453,10 +1478,6 @@
                     '<span class="badge badge-eligible">✅ Eligible</span>' :
                     '<span class="badge badge-noteligible">❌ Not</span>';
                 let attemptLabel = s.attempt === '1' ? '1st' : s.attempt === '2' ? '2nd' : s.attempt || '—';
-                let subjectsShort = s.subjects.map(sub =>
-                    `<span class="badge bg-light text-dark me-1" style="font-size:.65rem">${sub.subjectCode}${sub.medium}:${sub.grade}</span>`
-                ).join(' ');
-                if (subjectsShort.length > 80) subjectsShort = subjectsShort.substring(0, 80) + '…';
                 return `<tr>
                     <td>${s.indexNo||'—'}</td>
                     <td style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${s.name}">${s.name}</td>
